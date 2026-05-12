@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Final Ember</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="title">
+      <h1>Final Ember</h1>
+      <div>
+        <h2>Background</h2>
+        <p>
+          You are lost, sent down into a dungeon with only a torch, find you way
+          out and back into the light.
+        </p>
+      </div>
+      <div>
+        <h2>Tutorial</h2>
+        <p>
+          Complete the puzzle in the room to move on, fail and you lose a bit of
+          light in your torch. Click on the end of the tunnel to move on to the next room.
+        </p>
+      </div>
+      <div id="startButton">START</div>
+    </div>
+    <img src="images/Well-Lit.png" alt="Well lit torch" id="torchImage" />
+
+    <div class="entrance" id="entrance1" onclick="roomLoad()"></div>
+    <div id="puzzleBox"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
