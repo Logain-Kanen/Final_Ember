@@ -163,9 +163,7 @@ function puzzle1Load() { //first puzzle
     });
 
     dropZone.addEventListener("dragleave", function () {
-      //runs when the dragged item leaves the drop zone
       dropZone.classList.remove("hovered");
-      //removes the highlight cover
     });
 
     dropZone.addEventListener("drop", function (event) {
@@ -236,7 +234,7 @@ function puzzle1Load() { //first puzzle
   });
 }
 
-function puzzle2Load() {
+function puzzle2Load() { // puzzle 2, the 'simon says' style minigame
   puzzleBox.innerHTML = `
     <div id = 'puzzleBox2'>
       <div id='showBox'>
@@ -257,7 +255,7 @@ function puzzle2Load() {
     `;
 }
 let flashed = [];
-function startSequence() {
+function startSequence() { //the demonstration sequence
   let showBoxArray = Array.from(document.getElementsByClassName("show"));
   console.log(showBoxArray);
   document.getElementById("startSequence").style.display = "none";
@@ -287,7 +285,7 @@ function startSequence() {
   }, 1000);
 }
 let clickedArray = [];
-function storeClick() {
+function storeClick() { // stores the player's click value
   console.log(this.classList);
   this.classList.add("clicked");
   console.log(flashed);
@@ -329,7 +327,7 @@ let completionTimer;
 let barDownTimer1;
 let barDownTimer2;
 let activeBar;
-function puzzle3Load() {
+function puzzle3Load() { // loads the third puzzle, the bar controller
   puzzleBox.innerHTML = `
     <div id="puzzleBox3" onmouseup="barUp(3)">
       <div id="alert"></div>
@@ -456,7 +454,7 @@ function barUp(bar) {
     }
   }
 }
-function puzzle3Fail() {
+function puzzle3Fail() { //how the puzzle resets back to full and clears all original timers to reset them
   torchLoss();
   lossTimer();
   clearTimeout(completionTimer);
@@ -496,7 +494,7 @@ function puzzle3Fail() {
   }, 1000);
 }
 // Maze puzzle
-class Cell {
+class Cell { // creates the object with the id, row, col, and then boolean values for whether or not the side is possible to go through or not
   constructor(row, col, top, right, bottom, left) {
     this.id = `${row}-${col}`;
     this.row = row;
@@ -560,7 +558,7 @@ let userTopInset = -150;
 let cellSize = 50;
 let mask;
 
-function puzzle4Load() {
+function puzzle4Load() { // loads the maze onto the page
   puzzleBox.innerHTML = `
   <div id="puzzleBox4">
     <div id="mask"></div>
@@ -568,7 +566,7 @@ function puzzle4Load() {
     <p id='alert'></p>
   </div>
   `;
-  mazeTimer = setInterval(() => {
+  mazeTimer = setInterval(() => { //every 10 seconds the player loses torch light
     document.getElementById("alert").innerHTML =
       `You have lost some light in your torch, quickly find a way out.`;
     torchLoss();
@@ -584,7 +582,7 @@ function puzzle4Load() {
   let cell = maze.find((c) => c.id == `${userYPosition}-${userXPosition}`);
   mask = document.getElementById("mask");
   maze.forEach((cell) => drawCell(cell));
-  document.addEventListener("keydown", (event) => {
+  document.addEventListener("keydown", (event) => { //checks if the cell is able to be passed through, if yes, then moves the mask to keep track of the player
     switch (event.key) {
       case "ArrowLeft":
         if (cell.left) {
