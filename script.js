@@ -661,7 +661,7 @@ function puzzle4Load() { // loads the maze onto the page
       ctx.lineTo(x, y);
     }
 
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle = "white";
     ctx.lineWidth = 3;
     ctx.stroke();
   }
