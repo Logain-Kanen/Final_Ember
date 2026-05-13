@@ -24,7 +24,7 @@ document.getElementById("startButton").addEventListener("click", () => {
     <button class='saveButton' onclick="document.getElementById('title').style.display = 'none'">NO</button
   `;
 });
-function torchLoss() {
+function torchLoss() { //Runs when a puzzle is failed
   torch--;
   if (torch === 4) {
     torchImage.src = "images/Lit.png";
@@ -41,20 +41,20 @@ function torchLoss() {
     setToSave();
   }
 }
-function lossTimer() {
+function lossTimer() { //removes the alert after 1 second
   setTimeout(() => {
     document.getElementById("alert").textContent = "";
   }, 1000);
 }
-function setToSave() {
+function setToSave() { //gets the progress from local storage and sets the room to that room
   closestRest = JSON.parse(localStorage.getItem("closestRestStorage"));
   nextRoom = closestRest;
   roomLoad();
 }
 
-function roomLoad() {
+function roomLoad() { //loads the current room and increments next room
   currentRoom = nextRoom;
-  if (currentRoom === 0) {
+  if (currentRoom === 0) { //first rest room
     puzzleBox.innerHTML = `
         <h2> You have reached a rest room </h2>
         <p> Your torch has been refreshed and if you run out of light you will return here </p>
@@ -63,21 +63,21 @@ function roomLoad() {
     closestRest = 0;
     localStorage.setItem("closestRestStorage", JSON.stringify(closestRest));
     puzzleBox.style.display = "flex";
-  } else if (currentRoom === 1) {
+  } else if (currentRoom === 1) { //first puzzle room
     puzzleBox.innerHTML = `
         <h2> Puzzle 1</h2>
         <p>Drag each shape to an area to reveal what type of area it is, area must match to drop</p>
         <div id="puzzleBoxButton" onclick = 'puzzle1Load()'> BEGIN </div>
     `;
     puzzleBox.style.display = "flex";
-  } else if (currentRoom === 2) {
+  } else if (currentRoom === 2) { //second puzzle room
     puzzleBox.innerHTML = `
         <h2> Puzzle 2</h2>
         <p>The order you must light the braziers is flashed at the top, follow the order correctly to complete the minigame</p>
         <div id="puzzleBoxButton" onclick = 'puzzle2Load()'> BEGIN </div>
     `;
     puzzleBox.style.display = "flex";
-  } else if (currentRoom === 3) {
+  } else if (currentRoom === 3) { //second rest room
     puzzleBox.innerHTML = `
         <h2> You have reached a rest room </h2>
         <p> Your torch has been refreshed and if you run out of light you will return here </p>
@@ -86,21 +86,21 @@ function roomLoad() {
     closestRest = 3;
     localStorage.setItem("closestRestStorage", JSON.stringify(closestRest));
     puzzleBox.style.display = "flex";
-  } else if (currentRoom === 4) {
+  } else if (currentRoom === 4) { //third puzzle room
     puzzleBox.innerHTML = `
         <h2> Puzzle 3 </h2>
         <p> Click and hold on each bar to refill it, do not let the bars reach the left side</p>
         <div id="puzzleBoxButton" onclick='puzzle3Load()'>CLOSE</div>
     `;
     puzzleBox.style.display = "flex";
-  } else if (currentRoom === 5) {
+  } else if (currentRoom === 5) { //fourth puzzle room
     puzzleBox.innerHTML = `
         <h2> Puzzle 4 </h2>
         <p> You have found yourself in a dark maze, find your way out with the arrow keys</p>
         <div id="puzzleBoxButton" onclick='puzzle4Load()'>CLOSE</div>
     `;
     puzzleBox.style.display = "flex";
-  } else if (currentRoom === 6) {
+  } else if (currentRoom === 6) { //finishes the game, when button is clicked it reloads the page to start again
     puzzleBox.innerHTML = `
         <h2> You made it out! </h2>
         <p> As you exit the maze you see light and finally find your way out back to the surface.</p>
@@ -113,14 +113,14 @@ function roomLoad() {
   nextRoom++;
 }
 
-function restClose(restRoom) {
+function restClose(restRoom) { //Specifically for the rest room, resets the torch and changes the rest room
   torch = torchMax;
   closestRest = restRoom;
   puzzleBox.style.display = "none";
   torchImage.src = "images/Well-Lit.png";
 }
 
-function puzzle1Load() {
+function puzzle1Load() { //first puzzle
   puzzleBox.innerHTML = `
     <p id="alert"></p>
     <div id='boxContainer'>
@@ -135,9 +135,9 @@ function puzzle1Load() {
       <div id="dropZone3" class="drop-zone" style="left: ${Math.floor(Math.random() * 900) + 120}px; top:${Math.floor(Math.random() * 600) + 1}px"></div>
       <div id="dropZone4" class="drop-zone" style="left: ${Math.floor(Math.random() * 900) + 120}px; top:${Math.floor(Math.random() * 600) + 1}px"></div>
     </div>
-    `;
+    `; //Math.random randomizes the position values
 
-  let dropsLeft = 4;
+  let dropsLeft = 4; 
   let dragElm;
   // finds the drop and stores it in a variable
   document.querySelectorAll(".box").forEach((box) => {
